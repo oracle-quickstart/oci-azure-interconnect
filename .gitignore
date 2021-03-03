@@ -22,3 +22,8 @@ EBusinessSuite/graph.dot.fixed.Novars.Nolocals.txt
 EBusinessSuite/graph.dot.fixed.Novars.Nolocals.NoOutput.txt
 
 # Test
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?

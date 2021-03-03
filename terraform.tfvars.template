@@ -1,6 +1,3 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
-## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
-
 # ------ Oracle Required Variables
 region="us-ashburn-1"
 user_ocid="ocid1.user.oc1..XXXX"

@@ -28,7 +28,7 @@ You can follow below setps to deploy this setup in your account:
 1. Create a local copy of this repo using below command on your terminal: 
 
     ```
-    git clone https://github.com/apooniajjn/oci-azure-interconnect.git
+    https://github.com/oracle-quickstart/oci-azure-interconnect.git
     cd oci-azure-interconnect
     ls
     ```
