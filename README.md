@@ -1,85 +1,100 @@
-# Azure-OCI Cloud Inter-Connect
+# oci-azure-interconnect
 
-[Microsoft and Oracle’s cloud interoperability](https://news.microsoft.com/2019/06/05/microsoft-and-oracle-to-interconnect-microsoft-azure-and-oracle-cloud/) enables you to migrate and run mission-critical enterprise workloads across Microsoft Azure and Oracle Cloud Infrastructure. Run your Oracle database and enterprise applications—including JD Edwards EnterpriseOne, E-Business Suite, PeopleSoft, Oracle Retail, and WebLogic Server—on Oracle Linux, Windows Server, and other supported operating systems in Azure.
+This repository allows you to setup an Interconnect between Oracle Cloud Infrastrcture and Microsoft Azure.
 
-## Introduction
+## Prerequisites
 
-This repository contains terraform modules to deploy Azure-OCI Inter-connect as well as the infrastructure for Oracle applications. 
+You should complete below pre-requisites before proceeding to next section:
+- You have an active Oracle Cloud Infrastructure Account.
+- You have an active subscription to Microsoft Azure
+- Permission to `manage` the following types of resources in your Oracle Cloud Infrastructure tenancy and Microsoft Azure: `vcns`, `internet-gateways`, `route-tables`, `security-lists`, `subnets`, `instances`, `vnet`, `vnet gateways`.
 
-The repository contains modules for deploying the inter-connect between Microsoft Azure & OCI. The deployment is broken into two steps:
+Tested enviornment: 
+```
+➜  oci-azure-interconnect git:(main) terraform -v 
 
-- [**InterConnect-1:**](/InterConnect-1) This is the first step to establishing inter-connectivity.
-- [**InterConnect-2:**](/InterConnect-2) Once the connection between Oracle and Azure is setup, use this module to setup the connection to your Azure VNET and OCI VCN.
+Your version of Terraform is out of date! The latest version
+is 0.14.7. You can update by downloading from https://www.terraform.io/downloads.html
+Terraform v0.13.0
++ provider registry.terraform.io/hashicorp/azurerm v2.20.0
++ provider registry.terraform.io/hashicorp/http v2.1.0
++ provider registry.terraform.io/hashicorp/oci v4.15.0
+```
 
-> **NOTE**: Currently, the inter-connect is available available in the Azure's **East US** region and OCI's **Ashburn** region. Additional regions will be added in the future.
+## Deployment 
 
-In the near future, this repository will contain modules for deploying the infrastructure (reference architecture) for the following Oracle applications:
+You can follow below setps to deploy this setup in your account: 
 
-- [**Oracle E-Business Suite**](https://www.oracle.com/applications/ebusiness/)
-- [**JD Edwards EnterpriseOne**](https://www.oracle.com/applications/jd-edwards-enterpriseone/)
-- [**Oracle Retail Merchandising Suite**](https://www.oracle.com/industries/retail/retail-merchandising.html)
-- [**PeopleSoft**](https://www.oracle.com/applications/PEOPLESOFT/)
+1. Create a local copy of this repo using below command on your terminal: 
 
-> **NOTE:** This terraform scripts for Oracle applications provision only the infrastructure required to host the application. The scripts DO NOT install the application itself.
+    ```
+    git clone https://github.com/apooniajjn/oci-azure-interconnect.git
+    cd oci-azure-interconnect
+    ls
+    ```
 
-## Repository Structure
+2. Complete the prerequisites described [here] which are associated to install **Terraform** locally:(https://github.com/oracle-quickstart/oci-prerequisites#install-terraform).
+    Make sure you have terraform v0.13+ cli installed and accessible from your terminal.
 
-- [InterConnect-1](/InterConnect-1) => Contains the first set of terraform scripts to provision the Azure-OCI Cross-Cloud Interconnect
-- [InterConnect-2](/InterConnect-2) => Contains modules for the second step to provisioning the inter-connect.
+    ```bash
+    ➜  oci-azure-interconnect git:(main) terraform -v 
 
-**Future**:
+    Your version of Terraform is out of date! The latest version
+    is 0.14.7. You can update by downloading from https://www.terraform.io/downloads.html
+    Terraform v0.13.0
+    + provider registry.terraform.io/hashicorp/azurerm v2.20.0
+    + provider registry.terraform.io/hashicorp/http v2.1.0
+    + provider registry.terraform.io/hashicorp/oci v4.15.0
+    ```
 
-- JDEdwards => Scripts to provision the infrastructure for Oracle JDEdwards application
-- EBusinessSuite => Scripts to provision the infrastructure for Oracle E-Business Suite
-- Retail => Scripts to provision the infrastructure for Oracle Retail Merchandising Suite
-- PeopleSoft => Scripts to provision the infrastructure for Oracle Peoplesoft application
+3. Create a `terraform.tfvars` file in your **oci-azure-interconnect** directory, and specify the following variables:
 
-## Getting Started
+    ```
+    # Authentication
+    tenancy_ocid         = "<tenancy_ocid>"
+    user_ocid            = "<user_ocid>"
+    fingerprint          = "<finger_print>"
+    private_key_path     = "<pem_private_key_pem_file_path>"
 
-To deploy Oracle Applications on the Cross-Cloud inter-connect, you will first need the inter-connect provisioned. Follow the steps listed in the README for [InterConnect-1](/InterConnect-1) followed by [InterConnect-2](/InterConnect-2) to deploy the inter-connect. Once the inter-connect has been deployed, you can deploy an application on that inter-connect using the application specific terraform modules here. Follow the instructions and guidance detailed in the README file for each application.
-> **Note**: For Oracle applications, only infrastructure deployment can be automated using these terraform scripts. To install the specific application on the deployed infrastructure, please refer to the installation guide for that application.
+    # SSH Keys
+    ssh_public_key  = "<public_ssh_key_string_value>"
 
-## Learn More
+    # Region
+    region = "<oci_region>"
 
-- [Oracle Workloads on Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/oracle/oracle-overview)
-- [Microsoft and Oracle's Partnership Announcement](https://news.microsoft.com/2019/06/05/microsoft-and-oracle-to-interconnect-microsoft-azure-and-oracle-cloud/)
-- [Overview of Azure-OCI Inter-connect](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/oracle/oracle-oci-overview)
+    # Compartment
+    compartment_ocid = "<compartment_ocid>"
+    availability_domain_number = "<availability_domain_number>
 
-## Contributing
+    ## Azure Variables 
+    bandwidth="<virtial_cricuit_bandwidth>"
+    azure_region="<azure_region>"
+    peering_location="<peered_location>"
+    ````
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first. This will allow Azure terraform providor to manage resources on Azure enviornment.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+5. Create the Resources using the following commands:
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+    ```bash
+    terraform init
+    terraform plan
+    terraform apply
+    ```
 
-## Code of Conduct
+6. At this point your circuit should be up and you can connect to test VMs on both end and validate connectivity using ping/ssh and check latency. 
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+7. If you no longer require your infrastructure, you can run this command to destroy the resources:
 
-## Asking Questions, Reporting Bugs & Requesting Features
+    ```bash
+    terraform destroy
+    ```
+    > Note: End user noticed virtual circuit goes in failed state during deletion. You can re-run `terraform destroy` command to destroy the enviornment.
 
-Please create an issue to ask a question or to report a bug/feature request.
+## Architecture Diagram 
 
-## Reporting Security Issues
+> Update this throug PR. 
 
-Security issues and bugs should be reported privately, via email, to the Microsoft Security
-Response Center (MSRC) at [secure@microsoft.com](mailto:secure@microsoft.com). You should
-receive a response within 24 hours. If for some reason you do not, please follow up via
-email to ensure we received your original message. Further information, including the
-[MSRC PGP](https://technet.microsoft.com/en-us/security/dn606155) key, can be found in
-the [Security TechCenter](https://technet.microsoft.com/en-us/security/default).
+## Feedback 
 
-## License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-Licensed under the [MIT License](/LICENSE).
+Feedbacks are welcome to this repo, please open a PR if you have any.
