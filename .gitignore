@@ -12,15 +12,6 @@
 secret_env_vars.*
 secret_env_vars
 
-# EBS
-EBusinessSuite/graph.png
-EBusinessSuite/graph.dot
-EBusinessSuite/graph.gml
-EBusinessSuite/graph.dot.fixed.txt
-EBusinessSuite/graph.dot.fixed.Novars.txt
-EBusinessSuite/graph.dot.fixed.Novars.Nolocals.txt
-EBusinessSuite/graph.dot.fixed.Novars.Nolocals.NoOutput.txt
-
 # Test
 
 # OS generated files #

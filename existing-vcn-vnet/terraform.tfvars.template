@@ -1,0 +1,18 @@
+# ------ Oracle Required Variables
+region="us-ashburn-1"
+user_ocid="ocid1.user.oc1..XXXX"
+tenancy_ocid="ocid1.tenancy.oc1..XXXX"
+compartment_ocid="ocid1.compartment.oc1..XXXX"
+fingerprint="67:ce:e1:75:XXXXXXX"
+ssh_public_key  = "ssh-rsa XXXXX"
+private_key_path     = "~/<dir>/oci.pem"
+drg_ocid = "ocid1.XXX"
+
+# ------ Azure Required Variables
+bandwidth="1000"
+azure_region="West US"
+peering_location="Washington DC"
+resource_group_name="Resource Group Name"
+azure_virtual_network_name="network_name"
+gateway_subnet_name="GatewaySubnetName"
+gateway_public_ip_name="GatewayPublicIP"
