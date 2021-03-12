@@ -179,21 +179,6 @@ variable "oci_compute_subnet_dns_label" {
   default     = "computesubnet"
 }
 
-variable "oci_database_subnet_display_name" {
-  description = "Compute Subnet Name"
-  default     = "DatabaseSubnet"
-}
-
-variable "oci_database_subnet" {
-  description = "Database Subnet CIDR"
-  default     = "10.1.20.0/24"
-}
-
-variable "oci_database_subnet_dns_label" {
-  description = "Database Subnet DNS Label"
-  default     = "databasesubnet"
-}
-
 variable "internet_gateway_name" {
   description = "OCI Internet Gateway Name"
   default     = "IGW"
@@ -202,11 +187,6 @@ variable "internet_gateway_name" {
 variable "compute_route_table_display_name" {
   description = "OCI Compute Route Table Name"
   default     = "ComputeRouteTable"
-}
-
-variable "database_route_table_display_name" {
-  description = "OCI Database Route Table Name"
-  default     = "DatabaseRouteTable"
 }
 
 variable "security_policy_name" {

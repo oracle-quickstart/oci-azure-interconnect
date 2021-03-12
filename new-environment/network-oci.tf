@@ -21,23 +21,6 @@ resource "oci_core_subnet" "compute_subnet" {
   dhcp_options_id     = oci_core_vcn.interconnect_vcn.default_dhcp_options_id
 }
 
-# ------ Create Private Database Subnet
-resource "oci_core_subnet" "database_subnet" {
-  provider            = oci.oci
-  availability_domain = data.oci_identity_availability_domain.AD.name
-  cidr_block          = var.oci_database_subnet
-  display_name        = var.oci_database_subnet_display_name
-  dns_label           = var.oci_database_subnet_dns_label
-
-  security_list_ids = [oci_core_security_list.security_policies_azure.id]
-  compartment_id    = var.compartment_ocid
-  vcn_id            = oci_core_vcn.interconnect_vcn.id
-  route_table_id    = oci_core_route_table.database_route_table.id
-  dhcp_options_id   = oci_core_vcn.interconnect_vcn.default_dhcp_options_id
-
-  prohibit_public_ip_on_vnic = "true"
-}
-
 # ------ Create OCI VCN Internet Gateway
 resource "oci_core_internet_gateway" "internet_gateway" {
   provider       = oci.oci
@@ -58,20 +41,6 @@ resource "oci_core_route_table" "compute_route_table" {
     destination_type  = "CIDR_BLOCK"
     network_entity_id = oci_core_internet_gateway.internet_gateway.id
   }
-  route_rules {
-    destination       = azurerm_virtual_network.virtual_network.address_space[0]
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_drg.drg_azure.id
-  }
-}
-
-# ------ Create OCI Database Route Table
-resource "oci_core_route_table" "database_route_table" {
-  provider       = oci.oci
-  compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.interconnect_vcn.id
-  display_name   = var.database_route_table_display_name
-
   route_rules {
     destination       = azurerm_virtual_network.virtual_network.address_space[0]
     destination_type  = "CIDR_BLOCK"

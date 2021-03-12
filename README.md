@@ -6,9 +6,9 @@ This repository allows you to setup an Interconnect between Oracle Cloud Infrast
 
 You can follow individual use-cases to know more about their pre-requsities and installation instruction. 
 
-- Setup OCI/Azure interconnect on a new VNET and VCN setup: [New Setup](new-vcn-vnet)
-- Setup OCI/Azure Interconnect on an existing VNET and VCN enviornment: [Existing Setup](existing-vcn-vnet)
+- Setup OCI/Azure interconnect on a new VNET and VCN setup: [New Environment Setup](new-environment)
+- Setup OCI/Azure Interconnect on an existing VNET and VCN enviornment: [Existing Environment Setup](existing-environment)
 
 ## Feedback 
 
-Feedbacks are welcome to this repository, you can open an issue/PR accordingly.
+Feedbacks are welcome to this repository, you can open an issue and/or PR accordingly.

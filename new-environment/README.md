@@ -1,15 +1,18 @@
 # oci-azure-interconnect
 
-This repository allows you to setup an Interconnect between Oracle Cloud Infrastrcture and Microsoft Azure.
+In this repository you will be creating a new setup based on below architecture to setup an Interconnect circuit between Oracle Cloud and Microsoft Azure. 
+
+## Architecture Diagram 
+
+![](./images/arch.png)
+
 
 ## Prerequisites
 
 You should complete below pre-requisites before proceeding to next section:
-- You have an active Oracle Cloud Infrastructure Account.
+- You have an active Oracle Cloud Infrastructure Account and pre-requisites to access Oracle Cloud are setup properly.
 - You have an active subscription to Microsoft Azure
-- You have a working OCI enviornment which you want to connect to Azure: `drg` OCID is required to connect and setup this circuit 
-- You have a working Azure enviornment which you want to connect to OCI: `resource-group`, `virtual-network`, `gateway-subnet`, `gateway-subnet-public-ip` are required manadatory parameters which you need to pass to your variable file.
-- Permission to `manage` the following types of resources in your Oracle Cloud Infrastructure tenancy and Microsoft Azure: `virtual-circuits`, `expressroutes`, `vnet gateways`.
+- Permission to `manage` the following types of resources in your Oracle Cloud Infrastructure tenancy and Microsoft Azure: `vcns`, `internet-gateways`, `route-tables`, `security-lists`, `subnets`, `instances`, `vnet`, `vnet gateways`.
 
 Tested enviornment: 
 ```
@@ -31,12 +34,11 @@ You can follow below setps to deploy this setup in your account:
 
     ```
     https://github.com/oracle-quickstart/oci-azure-interconnect.git
-    cd oci-azure-interconnect
+    cd oci-azure-interconnect/new-vcn-vnet
     ls
     ```
 
-2. Complete the prerequisites described [here] which are associated to install **Terraform** locally:(https://github.com/oracle-quickstart/oci-prerequisites#install-terraform).
-    Make sure you have terraform v0.13+ cli installed and accessible from your terminal.
+2. Make sure you have terraform v0.13+ cli installed and accessible from your terminal.
 
     ```bash
     ➜  oci-azure-interconnect git:(main) terraform -v 
@@ -64,9 +66,6 @@ You can follow below setps to deploy this setup in your account:
     # Region
     region = "<oci_region>"
 
-    # DRG 
-    drg_ocid = "<drg_ocid>"
-
     # Compartment
     compartment_ocid = "<compartment_ocid>"
     availability_domain_number = "<availability_domain_number>
@@ -75,13 +74,9 @@ You can follow below setps to deploy this setup in your account:
     bandwidth="<virtial_cricuit_bandwidth>"
     azure_region="<azure_region>"
     peering_location="<peered_location>"
-    resource_group_name="<azure_resource_group_name>"
-    azure_virtual_network_name="<azure_virtual_network_name>"
-    gateway_subnet_name="<azure_virtual_network_gateway_subnet_name>"
-    gateway_public_ip_name="<azure_virtual_network_gateway_subnet_public_ip>"
     ````
 
-4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first. This will allow Azure terraform providor to manage resources on Azure enviornment.
+4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first.
 
 5. Create the Resources using the following commands:
 
@@ -91,9 +86,9 @@ You can follow below setps to deploy this setup in your account:
     terraform apply
     ```
 
-6. At this point your circuit should be up and you can connect to test VMs on both end and validate connectivity using ping/ssh and check latency. 
+6. At this point your circuits should be up and you can connect to test VMs on both end and validate connectivity using ping/ssh and check latency. 
 
-7. If you no longer require your infrastructure, you can run this command to destroy the resources in following orders:
+7. If you no longer require your infrastructure, you can run this command to destroy the resources:
 
     ```bash
     terraform destroy -target azurerm_virtual_network_gateway_connection.virtual_network_gateway_connection
@@ -103,10 +98,6 @@ You can follow below setps to deploy this setup in your account:
     ```bash
     terraform destroy 
     ```
-
-## Architecture Diagram 
-
-> Update this throug PR. 
 
 ## Feedback 
 
