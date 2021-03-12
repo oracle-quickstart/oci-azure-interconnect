@@ -2,7 +2,7 @@
 resource "azurerm_virtual_network_gateway" "virtual_network_gateway" {
   provider            = azurerm.azure
   name                = var.virtual_network_gateway_name
-  location            = data.azurerm_resource_group.resource_group.location
+  location            = data.azurerm_resource_group.resource_group_name.location
   resource_group_name = var.resource_group_name
 
   type = "ExpressRoute"
@@ -20,7 +20,7 @@ resource "azurerm_virtual_network_gateway" "virtual_network_gateway" {
 resource "azurerm_virtual_network_gateway_connection" "virtual_network_gateway_connection" {
   provider                     = azurerm.azure
   name                         = var.virtual_network_gateway_connection_name
-  location                     = data.azurerm_resource_group.resource_group.location
+  location                     = data.azurerm_resource_group.resource_group_name.location
   resource_group_name          = var.resource_group_name
   express_route_gateway_bypass = "true"
   type                         = "ExpressRoute"

@@ -25,7 +25,7 @@ resource "azurerm_express_route_circuit" "express_route_circuit" {
   provider              = azurerm.azure
   name                  = var.azure_express_circuit_name
   resource_group_name   = var.resource_group_name
-  location              = data.azurerm_resource_group.resource_group.location
+  location              = data.azurerm_resource_group.resource_group_name.location
   service_provider_name = "Oracle Cloud FastConnect"
   peering_location      = var.peering_location
   bandwidth_in_mbps     = var.bandwidth

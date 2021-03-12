@@ -28,13 +28,8 @@ variable "shape" {
   }
 }
 
-data "http" "myip" {
-  url = "http://checkip.dyndns.com/"
-}
-
-
 # ------ Get the Azure Resource Group Details
-data "azurerm_resource_group" "resource_group" {
+data "azurerm_resource_group" "resource_group_name" {
   provider = azurerm.azure
   name     = var.resource_group_name
 }

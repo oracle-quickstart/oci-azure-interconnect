@@ -81,18 +81,6 @@ resource "azurerm_network_security_group" "azure_nsg" {
   }
 
   security_rule {
-    name                       = "ocidatabasein"
-    priority                   = 101
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = oci_core_subnet.database_subnet.cidr_block
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
     name                       = "admin-in"
     priority                   = 102
     direction                  = "Inbound"
