@@ -61,6 +61,11 @@ resource "oci_core_instance" "oci_compute_instance" {
     ssh_authorized_keys = var.ssh_public_key
   }
 
+  shape_config {
+    memory_in_gbs = var.instance_shape_config_memory_in_gbs
+    ocpus = var.instance_shape_config_ocpus
+  }
+
   source_details {
     source_type             = "image"
     source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
