@@ -23,6 +23,16 @@ data "oci_core_fast_connect_provider_service" "test_fast_connect_provider_servic
   provider_service_id = "${lookup(element(data.oci_core_fast_connect_provider_services.test_fast_connect_provider_services.fast_connect_provider_services, index(data.oci_core_fast_connect_provider_services.test_fast_connect_provider_services.fast_connect_provider_services.*.provider_name, "Microsoft Azure")), "id")}"
 }
 
+# ------ Memory in gbs
+variable "instance_shape_config_memory_in_gbs" {
+  default = "50"
+}
+
+# ------ Cpu's
+variable "instance_shape_config_ocpus" {
+  default = "1"
+}
+
 # ------ Define a Variable for Shape
 variable "shape" {
   type = map
@@ -36,7 +46,7 @@ variable "shape" {
 }
 
 data "http" "myip" {
-  url = "http://checkip.dyndns.com/"
+  url = "http://ipv4.icanhazip.com/"
 }
 
 # ------ Get the latest Oracle Linux image

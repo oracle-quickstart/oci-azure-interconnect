@@ -52,7 +52,7 @@ variable "bandwidth" {
 
 variable "InstanceShape" {
   description = "Instance Default Size"
-  default     = "VM.Standard2.1"
+  default     = "VM.Standard.A1.Flex"
 }
 
 variable "InstanceImageOCID" {
