@@ -25,6 +25,7 @@ OCI and Azure provides interconnected regions where it’s possible. This allows
 We will document initial use-case which will include configuration, pricing, and additional details. 
  
 ![](./images/scenario1.png)
+
 Figure 1: Use-Case Network Topology 
 
 ### Required network resources: 
