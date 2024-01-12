@@ -81,7 +81,7 @@ You can follow below setps to deploy this setup in your account:
     gateway_public_ip_name="<azure_virtual_network_gateway_subnet_public_ip>"
     ````
 
-4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first. This will allow Azure terraform providor to manage resources on Azure enviornment.
+4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first. This will allow Azure terraform providor to manage resources on Azure enviornment. Verify you have `az account set --subscription` if you have multiple subscriptions, etc. as described here: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli.html
 
 5. Create the Resources using the following commands:
 
