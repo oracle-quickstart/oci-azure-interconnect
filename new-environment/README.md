@@ -76,7 +76,7 @@ You can follow below setps to deploy this setup in your account:
     peering_location="<peered_location>"
     ````
 
-4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first.
+4. Login to Microsoft Azure from CLI using **az login**. If you don't have Azure CLI utility installed locally you will have to do that first.  Verify you have `az account set --subscription` if you have multiple subscriptions, etc. as described here: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli.html
 
 5. Create the Resources using the following commands:
 
