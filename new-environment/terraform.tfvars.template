@@ -10,5 +10,6 @@ private_key_path     = "~/<dir>/oci.pem"
 
 # ------ Azure Required Variables
 bandwidth="1000"
+# See # See https://learn.microsoft.com/en-us/azure/expressroute/expressroute-locations-providers for region and peering location name for region and peering location name
 azure_region="West US"
 peering_location="Washington DC"
