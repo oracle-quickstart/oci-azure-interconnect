@@ -21,8 +21,7 @@ Please consult the [security guide](./SECURITY.md) for our responsible security 
 
 Copyright (c) 2023 Oracle and/or its affiliates.
 
-Released under the MIT License as shown at
-<>.
+Released under the MIT License
 
 ## Feedback 
 
